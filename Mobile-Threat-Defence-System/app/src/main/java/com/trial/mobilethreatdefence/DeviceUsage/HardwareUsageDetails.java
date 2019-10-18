@@ -91,8 +91,8 @@ public class HardwareUsageDetails {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public double readRamUsage(){
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
-        ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-        activityManager.getMemoryInfo(mi);
+//        ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+//        activityManager.getMemoryInfo(mi);
         double availableMegs = mi.availMem / 0x100000L;
 
 //Percentage can be calculated for API 16+
