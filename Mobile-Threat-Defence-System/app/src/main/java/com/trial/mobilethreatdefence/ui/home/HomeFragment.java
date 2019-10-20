@@ -82,34 +82,39 @@ public class HomeFragment extends Fragment {
                     case 1: break;
                     case 2: break;
                     case 3:
-                        final PackageManager pm = getActivity().getPackageManager();
-                        PackageInfo packageInfo = new PackageInfo();
-                        PermissionInfo permissionInfo;
-                        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-                        for (ApplicationInfo applicationInfo : packages) {
-                            try {
-                                packageInfo = pm.getPackageInfo(applicationInfo.packageName, PackageManager.GET_PERMISSIONS);
-                                permissionInfo = pm.getPermissionInfo(applicationInfo.packageName, PackageManager.GET_META_DATA);
+//                        final PackageManager pm = getActivity().getPackageManager();
+//                        PackageInfo packageInfo = new PackageInfo();
+//                        PermissionInfo permissionInfo;
+//                        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+//                        for (ApplicationInfo applicationInfo : packages) {
+//                            try {
+//                                packageInfo = pm.getPackageInfo(applicationInfo.packageName, PackageManager.GET_PERMISSIONS);
+//                                permissionInfo = pm.getPermissionInfo(applicationInfo.packageName, PackageManager.GET_META_DATA);
 //                                Log.d(TAG, "Permission Info :" + permissionInfo.group);
-                            } catch (PackageManager.NameNotFoundException e) {
-                                e.printStackTrace();
-                            }
+//                            } catch (PackageManager.NameNotFoundException e) {
+//                                e.printStackTrace();
 //                            Log.d(TAG, "Installed package :" + applicationInfo.packageName);
 //                            Log.d(TAG, "Package Info :" + packageInfo.permissions);
 //                            Log.d(TAG, "Source dir : " + applicationInfo.sourceDir);
 //                            Log.d(TAG, "Launch Activity :" + pm.getLaunchIntentForPackage(applicationInfo.packageName));
+//
+//                            ApplicationInfo ai;
+//                            try {
+//                                ai = pm.getApplicationInfo(applicationInfo.packageName, 0);
+//                            } catch (PackageManager.NameNotFoundException e) {
+//                                ai = null;
+//                                e.printStackTrace();
+//                            }
+//                            String applicationName = (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
+//                            Log.d(TAG, "Package Name :" + applicationName);
+//
+//                        }
 
-                            ApplicationInfo ai;
-                            try {
-                                ai = pm.getApplicationInfo(applicationInfo.packageName, 0);
-                            } catch (PackageManager.NameNotFoundException e) {
-                                ai = null;
-                                e.printStackTrace();
-                            }
-                            String applicationName = (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
-                            Log.d(TAG, "Package Name :" + applicationName);
 
-                        }
+                        Intent intent = new Intent(getActivity(), AppList.class);
+                        startActivity(intent);
+
+
                         break;
                 }
 

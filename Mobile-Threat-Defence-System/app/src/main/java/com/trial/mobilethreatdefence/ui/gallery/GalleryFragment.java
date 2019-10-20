@@ -1,6 +1,7 @@
 package com.trial.mobilethreatdefence.ui.gallery;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -64,36 +65,46 @@ public class GalleryFragment extends Fragment {
 
                 final PackageManager pm = getActivity().getPackageManager();
                 List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+                Intent intent = new Intent(getActivity(), PermittedAppList.class);
 
                 switch (i){
                     case 0:
-                        for (ApplicationInfo applicationInfo : packages) {
-
-                            int flag = pm.checkPermission( permission.READ_CALL_LOG , applicationInfo.packageName);
-
-                            ApplicationInfo ai;
-                            try {
-                                ai = pm.getApplicationInfo(applicationInfo.packageName, 0);
-                            } catch (PackageManager.NameNotFoundException e) {
-                                ai = null;
-                                e.printStackTrace();
-                            }
-                            String applicationName = (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
-                            if (flag == PackageManager.PERMISSION_GRANTED) {
-                                Log.d(TAG, "Package Name with permission :" + applicationName + " Has Read call log Permission.");
-                            }
-                            else {
-                                Log.d(TAG, "Package Name don't have permission:" + applicationName );
-
-                            }
-                        }
+//                        for (ApplicationInfo applicationInfo : packages) {
+//                            int flag = pm.checkPermission(permission.READ_CALL_LOG , applicationInfo.packageName);
+//                            ApplicationInfo ai;
+//                            try {
+//                                ai = pm.getApplicationInfo(applicationInfo.packageName, 0);
+//                            } catch (PackageManager.NameNotFoundException e) {
+//                                ai = null;
+//                                e.printStackTrace();
+//                            }
+//                            String applicationName = (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
+//                            if (flag == PackageManager.PERMISSION_GRANTED) {
+//                                Log.d(TAG, "Package Name with permission :" + applicationName + " Has Read call log Permission.");
+//                            }
+//                            else {
+//                                Log.d(TAG, "Package Name don't have permission:" + applicationName );
+//                            }
+//                        }
+                        intent.putExtra("GET_PERMISSION_FLAG", permission.READ_CALL_LOG);
                         break;
-                    case 1: break;
-                    case 2: break;
-                    case 3: break;
-                    case 4: break;
-                    case 5: break;
+                    case 1:
+                        intent.putExtra("GET_PERMISSION_FLAG", permission.CAMERA);
+                        break;
+                    case 2:
+                        intent.putExtra("GET_PERMISSION_FLAG", permission.READ_CONTACTS);
+                        break;
+                    case 3:
+                        intent.putExtra("GET_PERMISSION_FLAG", permission.READ_EXTERNAL_STORAGE);
+                        break;
+                    case 4:
+                        intent.putExtra("GET_PERMISSION_FLAG", permission.READ_SMS);
+                        break;
+                    case 5:
+                        intent.putExtra("GET_PERMISSION_FLAG", permission.ACCESS_FINE_LOCATION);
+                        break;
                 }
+                startActivity(intent);
 
             }
         });
@@ -102,17 +113,18 @@ public class GalleryFragment extends Fragment {
     }
 
     private void galleryListPopulate() {
-        accessPermissionModel = new AccessPermissionModel("Call Logs","");
+
+        accessPermissionModel = new AccessPermissionModel("Call Logs","View List of apps with this permission.");
         accessPermissionModelArrayList.add(accessPermissionModel);
-        accessPermissionModel = new AccessPermissionModel("Camera","");
+        accessPermissionModel = new AccessPermissionModel("Camera","View List of apps with this permission.");
         accessPermissionModelArrayList.add(accessPermissionModel);
-        accessPermissionModel = new AccessPermissionModel("Contacts","");
+        accessPermissionModel = new AccessPermissionModel("Contacts","View List of apps with this permission.");
         accessPermissionModelArrayList.add(accessPermissionModel);
-        accessPermissionModel = new AccessPermissionModel("Storage","");
+        accessPermissionModel = new AccessPermissionModel("Storage","View List of apps with this permission.");
         accessPermissionModelArrayList.add(accessPermissionModel);
-        accessPermissionModel = new AccessPermissionModel("SMS","");
+        accessPermissionModel = new AccessPermissionModel("SMS","View List of apps with this permission.");
         accessPermissionModelArrayList.add(accessPermissionModel);
-        accessPermissionModel = new AccessPermissionModel("Location","");
+        accessPermissionModel = new AccessPermissionModel("Location","View List of apps with this permission.");
         accessPermissionModelArrayList.add(accessPermissionModel);
 
         accessPermissionAdapter = new AccessPermissionAdapter(getContext(), R.layout.gallery_list_layout,accessPermissionModelArrayList);
