@@ -10,7 +10,11 @@ public class SendViewModel extends ViewModel {
 
     public SendViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is send fragment");
+        mText.setValue("Mobile security refers to efforts to secure" +
+                " data on mobile devices such as smartphones and tablets." +
+                " Typically, mobile security is something that we are " +
+                "working on to control sensitive information that could be " +
+                "jeopardized because of its use on various mobile devices.");
     }
 
     public LiveData<String> getText() {

@@ -10,7 +10,7 @@ public class ShareViewModel extends ViewModel {
 
     public ShareViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is share fragment");
+        mText.setValue("\n\n\n\n\nYou can send us mail on \nalphabeta@gamma.com \nor just press the button below.");
     }
 
     public LiveData<String> getText() {
